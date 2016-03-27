@@ -5,15 +5,13 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
-import com.jetbrains.swift.psi.SwiftIdentifierPattern;
-import com.jetbrains.swift.psi.SwiftPsiElement;
-import com.jetbrains.swift.psi.SwiftReferenceExpression;
-import com.jetbrains.swift.psi.SwiftVisitor;
+import com.jetbrains.swift.psi.*;
+import com.jetbrains.swift.psi.types.SwiftImplicitlyUnwrappedType;
 import com.jetbrains.swift.psi.types.SwiftOptionalType;
 import com.jetbrains.swift.psi.types.SwiftType;
 import org.jetbrains.annotations.NotNull;
 
-import static com.sylvanaar.appcode.swift.highlighter.SwiftHighlightingData.OPTIONAL;
+import static com.sylvanaar.appcode.swift.highlighter.SwiftHighlightingData.*;
 
 /**
  * Created by Sylvanaar on 3/25/16.
@@ -36,9 +34,9 @@ public class SwiftOptionalAnnotator extends SwiftVisitor implements Annotator {
     public void visitReferenceExpression(@NotNull SwiftReferenceExpression re) {
         SwiftType type = re.getType().resolveType();
 
-        log.debug("Reference <" + re.getName() + "> type <" + type + ">");
-
-        if (type instanceof SwiftOptionalType) {
+        if (type instanceof  SwiftImplicitlyUnwrappedType) {
+            addSemanticHighlight(re, IMPLICIT_OPTIONAL);
+        } else if (type instanceof SwiftOptionalType) {
             addSemanticHighlight(re, OPTIONAL);
         }
     }
@@ -47,17 +45,25 @@ public class SwiftOptionalAnnotator extends SwiftVisitor implements Annotator {
     public void visitIdentifierPattern(@NotNull SwiftIdentifierPattern id) {
         SwiftType type = id.getSwiftType();
 
-
-        log.debug("Reference <" + id.getName() + "> type <" + type + ">");
-
-        if (type instanceof SwiftOptionalType) {
+        if (type instanceof SwiftImplicitlyUnwrappedType) {
+            addSemanticHighlight(id, IMPLICIT_OPTIONAL);
+        } else if (type instanceof SwiftOptionalType) {
             addSemanticHighlight(id, OPTIONAL);
         }
     }
 
+
+    @Override
+    public void visitOptionalChainingExpression(@NotNull SwiftOptionalChainingExpression o) {
+        addSemanticHighlight(o.getLastChild(), OPTIONAL_CHAIN_OPERATOR);
+    }
+
+    @Override
+    public void visitForcedValueExpression(@NotNull SwiftForcedValueExpression o) {
+        addSemanticHighlight(o.getLastChild(), FORCE_UNWRAP_OPERATOR);
+    }
+
     private void addSemanticHighlight(PsiElement id, TextAttributesKey key) {
         myHolder.createInfoAnnotation(id.getTextRange(), null).setTextAttributes(key);
-
-//        myHolder.createErrorAnnotation(id, "Optional-Test");
     }
 }

@@ -19,7 +19,10 @@ import java.util.Map;
  */
 public class SwiftColorsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] ATTRS = new AttributesDescriptor[]{
-            new AttributesDescriptor(SwiftBundle.message("color.settings.optional"), SwiftHighlightingData.OPTIONAL)
+            new AttributesDescriptor(SwiftBundle.message("color.settings.optional"), SwiftHighlightingData.OPTIONAL),
+            new AttributesDescriptor(SwiftBundle.message("color.settings.implicity.unwrapped.optional"), SwiftHighlightingData.IMPLICIT_OPTIONAL),
+            new AttributesDescriptor(SwiftBundle.message("color.settings.optional.chain.operator"), SwiftHighlightingData.OPTIONAL_CHAIN_OPERATOR),
+            new AttributesDescriptor(SwiftBundle.message("color.settings.optional.force.unwrap.operator"), SwiftHighlightingData.FORCE_UNWRAP_OPERATOR)
     };
 
     @Nullable

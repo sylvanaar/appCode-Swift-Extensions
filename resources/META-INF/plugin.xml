@@ -5,7 +5,10 @@
     <vendor url="https://www.ohloh.net/accounts/sylvanaar" email="sylvanaar@mindspring.com">sylvanaar</vendor>
 
     <description><![CDATA[
-      Enhancements to the Swift support
+      Enhancements to the Swift support:
+
+      * Semantic Highlighting For Optionals
+      * Read/Write Highlighting
     ]]></description>
 
     <change-notes><![CDATA[
