@@ -1,0 +1,31 @@
+<idea-plugin version="2">
+    <id>com.sylvanaar.appcode.swift-enhancements</id>
+    <name>Swift Enhancements</name>
+    <version>0.1</version>
+    <vendor url="https://www.ohloh.net/accounts/sylvanaar" email="sylvanaar@mindspring.com">sylvanaar</vendor>
+
+    <description><![CDATA[
+      Enhancements to the Swift support
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Experimental Build
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="141.0"/>
+
+    <depends>com.intellij.modules.appcode</depends>
+    <depends>com.intellij.appcode-swift</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <readWriteAccessDetector implementation="com.sylvanaar.appcode.swift.highlighter.SwiftReadWriteAccessDetector" />
+        <annotator language="Swift" implementationClass="com.sylvanaar.appcode.swift.annotator.SwiftOptionalAnnotator" order="last"/>
+        <colorSettingsPage implementation="com.sylvanaar.appcode.swift.highlighter.SwiftColorsPage" />
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
