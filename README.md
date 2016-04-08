@@ -1,5 +1,5 @@
 # Swift Enhancements for JetBrains appCode IDE
-This projet is just in the experimental stages. I want to see if I can enhance the Swift support in the appCode IDE. There are currently very few features, but they are slowly being added.
+This project is just in the experimental stages. I want to see if I can enhance the Swift support in the appCode IDE. There are currently very few features, but they are slowly being added.
 
 
 ### Features:
