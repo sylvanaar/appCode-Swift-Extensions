@@ -22,13 +22,21 @@
     <depends>com.intellij.appcode-swift</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <readWriteAccessDetector implementation="com.sylvanaar.appcode.swift.highlighter.SwiftReadWriteAccessDetector" />
+        <readWriteAccessDetector implementation="com.sylvanaar.appcode.swift.highlighter.SwiftReadWriteAccessDetector" />   
         <annotator language="Swift" implementationClass="com.sylvanaar.appcode.swift.annotator.SwiftOptionalAnnotator" order="last"/>
         <colorSettingsPage implementation="com.sylvanaar.appcode.swift.highlighter.SwiftColorsPage" />
+
+        <intentionAction>
+            <bundleName>com.sylvanaar.appcode.swift.intentions.SwiftIntentionsBundle</bundleName>
+            <categoryKey>intention.category.swift.enhancements</categoryKey>
+            <className>com.sylvanaar.appcode.swift.intentions.style.RemoveUneededParenthesis</className>
+        </intentionAction>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
     </actions>
+
+
 
 </idea-plugin>
