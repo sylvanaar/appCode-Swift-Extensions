@@ -26,7 +26,7 @@ public class RemoveUneededParenthesis extends BaseIntentionAction {
     @NotNull
     @Override
     public String getFamilyName() {
-        return SwiftIntentionsBundle.message("remove.unecessary.parenthesis.family.name");
+        return SwiftIntentionsBundle.message("remove.unnecessary.parenthesis.family.name");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class RemoveUneededParenthesis extends BaseIntentionAction {
             }
 
             if (conditional instanceof SwiftConditionClause) {
-                setText(SwiftIntentionsBundle.message("remove.unecessary.parenthesis"));
+                setText(SwiftIntentionsBundle.message("remove.unnecessary.parenthesis"));
                 return true;
             }
         }
