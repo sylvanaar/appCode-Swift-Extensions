@@ -9,6 +9,8 @@
 
       * Semantic Highlighting For Optionals
       * Read/Write Highlighting
+      * Unneeded Parenthesis Intention
+      * Convert to trailing closure Intention
     ]]></description>
 
     <change-notes><![CDATA[
