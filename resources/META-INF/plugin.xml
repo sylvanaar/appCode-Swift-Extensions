@@ -31,6 +31,11 @@
             <categoryKey>intention.category.swift.enhancements</categoryKey>
             <className>com.sylvanaar.appcode.swift.intentions.style.RemoveUneededParenthesis</className>
         </intentionAction>
+        <intentionAction>
+            <bundleName>com.sylvanaar.appcode.swift.intentions.SwiftIntentionsBundle</bundleName>
+            <categoryKey>intention.category.swift.enhancements</categoryKey>
+            <className>com.sylvanaar.appcode.swift.intentions.style.ConvertToTrailingClosure</className>
+        </intentionAction>
     </extensions>
 
     <actions>
