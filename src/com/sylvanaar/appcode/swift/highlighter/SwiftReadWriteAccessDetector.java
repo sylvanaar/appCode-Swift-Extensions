@@ -23,6 +23,7 @@ public class SwiftReadWriteAccessDetector extends ReadWriteAccessDetector {
 
     @Override
     public Access getReferenceAccess(PsiElement psiElement, PsiReference psiReference) {
+        if (psiReference == null) return null;
         assert (psiReference instanceof SwiftReferenceExpression);
         SwiftPsiElement parent = (SwiftPsiElement) ((SwiftReferenceExpression) psiReference).getParent();
         if (parent instanceof SwiftOptionalChainingExpression || parent instanceof SwiftForcedValueExpression) {
@@ -64,7 +65,7 @@ public class SwiftReadWriteAccessDetector extends ReadWriteAccessDetector {
             SwiftBinaryOperator operatorPsi = ((BinaryNode) root).getOperatorPsi();
             if (operatorPsi.getText().equals("=")) {
                 result = Access.Write;
-            } else if (operatorPsi.getText().length() == 2 && operatorPsi.getText().charAt(1) == '=') {
+            } else if (operatorPsi.getText().length() == 2 && operatorPsi.getText().charAt(1) == '=' && !(operatorPsi.getText().charAt(0) == '=')) {
                 result = Access.ReadWrite;
             }
 
