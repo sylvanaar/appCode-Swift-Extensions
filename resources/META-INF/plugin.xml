@@ -11,6 +11,7 @@
       * Read/Write Highlighting
       * Unneeded Parenthesis Intention
       * Convert to trailing closure Intention
+      * Unneeded return inspection
     ]]></description>
 
     <change-notes><![CDATA[
@@ -27,6 +28,11 @@
         <readWriteAccessDetector implementation="com.sylvanaar.appcode.swift.highlighter.SwiftReadWriteAccessDetector" />   
         <annotator language="Swift" implementationClass="com.sylvanaar.appcode.swift.annotator.SwiftOptionalAnnotator" order="last"/>
         <colorSettingsPage implementation="com.sylvanaar.appcode.swift.highlighter.SwiftColorsPage" />
+
+        <localInspection language="Swift" groupPath="Swift-Extensions" shortName="SwiftUnneededReturn"
+                         bundle="com.sylvanaar.appcode.swift.inspections.SwiftInspectionsBundle"
+                         key="unneeded.return" groupName="Style" enabledByDefault="true" level="WARNING"
+                         implementationClass="com.sylvanaar.appcode.swift.inspections.style.SwiftUnneededReturnInspection"/>
 
         <intentionAction>
             <bundleName>com.sylvanaar.appcode.swift.intentions.SwiftIntentionsBundle</bundleName>

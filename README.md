@@ -7,3 +7,4 @@ This project is just in the experimental stages. I want to see if I can enhance 
 2. Variable Read/Write Highlighting
 3. Remove Unneeded Parenthesis Intention
 4. Convert closure parameter to trailing closure
+5. Unneeded return in a closure Inspection
