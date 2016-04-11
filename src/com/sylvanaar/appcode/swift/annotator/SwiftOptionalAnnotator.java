@@ -4,6 +4,7 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.jetbrains.swift.psi.*;
 import com.jetbrains.swift.psi.types.SwiftImplicitlyUnwrappedType;
@@ -34,10 +35,12 @@ public class SwiftOptionalAnnotator extends SwiftVisitor implements Annotator {
     public void visitReferenceExpression(@NotNull SwiftReferenceExpression re) {
         SwiftType type = re.getType().resolveType();
 
+        TextRange range = re.getTextRange().cutOut(re.getRangeInElement());
+
         if (type instanceof  SwiftImplicitlyUnwrappedType) {
-            addSemanticHighlight(re, IMPLICIT_OPTIONAL);
+            addSemanticHighlight(range, IMPLICIT_OPTIONAL);
         } else if (type instanceof SwiftOptionalType) {
-            addSemanticHighlight(re, OPTIONAL);
+            addSemanticHighlight(range, OPTIONAL);
         }
     }
 
@@ -46,24 +49,24 @@ public class SwiftOptionalAnnotator extends SwiftVisitor implements Annotator {
         SwiftType type = id.getSwiftType();
 
         if (type instanceof SwiftImplicitlyUnwrappedType) {
-            addSemanticHighlight(id, IMPLICIT_OPTIONAL);
+            addSemanticHighlight(id.getTextRange(), IMPLICIT_OPTIONAL);
         } else if (type instanceof SwiftOptionalType) {
-            addSemanticHighlight(id, OPTIONAL);
+            addSemanticHighlight(id.getTextRange(), OPTIONAL);
         }
     }
 
 
     @Override
     public void visitOptionalChainingExpression(@NotNull SwiftOptionalChainingExpression o) {
-        addSemanticHighlight(o.getLastChild(), OPTIONAL_CHAIN_OPERATOR);
+        addSemanticHighlight(o.getLastChild().getTextRange(), OPTIONAL_CHAIN_OPERATOR);
     }
 
     @Override
     public void visitForcedValueExpression(@NotNull SwiftForcedValueExpression o) {
-        addSemanticHighlight(o.getLastChild(), FORCE_UNWRAP_OPERATOR);
+        addSemanticHighlight(o.getLastChild().getTextRange(), FORCE_UNWRAP_OPERATOR);
     }
 
-    private void addSemanticHighlight(PsiElement id, TextAttributesKey key) {
-        myHolder.createInfoAnnotation(id.getTextRange(), null).setTextAttributes(key);
+    private void addSemanticHighlight(TextRange range, TextAttributesKey key) {
+        myHolder.createInfoAnnotation(range, null).setTextAttributes(key);
     }
 }
